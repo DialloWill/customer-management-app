@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restock Product</title>
+</head>
+<body>
+    <h1>Restock Product: {{ product[1] }}</h1>
+    
+    <p><strong>Current Inventory:</strong> {{ product[4] }} units</p>
+    
+    <form method="POST" action="/process_restock/{{ product[0] }}">
+        <label>Add Quantity:</label>
+        <input type="number" name="add_quantity" min="1" required>
+        <button type="submit">Add to Inventory</button>
+    </form>
+    
+    <p><a href="/products">Back to Products</a></p>
+</body>
+</html>
