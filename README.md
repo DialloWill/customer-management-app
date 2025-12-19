@@ -2,7 +2,7 @@
 
 A full-stack customer management system built with Python, Flask, and SQLite. This project demonstrates my ability to build secure, functional web applications with user authentication, database design, and business analytics.
 
-🎥 [Video Demo Coming Soon] (Recording in progress)
+🎥 [Watch Video Demo] (https://youtu.be/cs8m9sUQCxw) - Full walktrhough of features
 
 ---
 
