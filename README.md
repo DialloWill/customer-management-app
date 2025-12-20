@@ -3,31 +3,56 @@
 A full-stack customer management system built with Python, Flask, and SQLite. This project demonstrates my ability to build secure, functional web applications with user authentication, database design, and business analytics.
 
 🎥 [Watch Video Demo] (https://youtu.be/cs8m9sUQCxw) - Full walktrhough of features
+*Note: This is a visual demonstration. The app features are also documented in detail below.*
 
 ---
+ ✨ Key Features
 
- 🚀 Key Features
-
-User Authentication & Security
-- Secure login/logout system with SHA-256 password hashing
+ 🔐 Security & Authentication
+- User registration and login system
+- SHA-256 password hashing
 - Session management with Flask sessions
-- Protected routes requiring authentication
-- Input validation and SQL injection prevention
+- Protected routes (login required for sensitive operations)
 
-Customer & Product Management
-- Add, view, edit, and delete customer records
-- Product inventory tracking
-- Relational database design with normalized tables
+ 👥 Customer Management (Full CRUD)
+- Create: Add new customers with validation
+- Read: View all customers with detailed information
+- Update: Edit customer details (name, location, amount)
+- Delete: Remove customers with confirmation
+- Email validation (regex pattern matching)
+- Age tracking and analytics
 
-Business Analytics Dashboard
-- Real-time analytics: customer count, total revenue, average order value
-- Statistical calculations (median, sum, count)
-- Data visualization of key metrics
+ 📊 Business Analytics Dashboard
+- Real-time metrics: total customers, revenue, average purchase
+- VIP customer identification with customizable threshold
+- Customer ranking by composite score (spending + loyalty points)
+- Average customer age calculation
+- Location-based revenue statistics
 
-Data Export & Reporting
-- Export customer data to CSV format
+ 📦 Product & Inventory Management
+- Product performance tracking (revenue, units sold)
+- Real-time inventory monitoring
+- Low stock alerts (< 10 units)
+- Restock functionality
+
+ 🔍 Advanced Search & Filtering
+- Search customers by name (linear search algorithm)
+- Filter customers by location
+- Location statistics (customer count, total revenue, avg spending)
+- Revenue reports by date range
+
+ 📈 Data Export & Reporting
+- Export customer data to CSV
+- Export to Excel format (.xls)
 - Automated report generation
-- Search and filter functionality
+- Revenue analysis by date range
+
+ 🗄️ Database Design
+- SQLite database with 3 normalized tables:
+  - **customers**: id, name, location, amount, age, email, purchase_date
+  - **products**: id, name, revenue, units, inventory
+  - **users**: id, username, password_hash
+- Prevents SQL injection with parameterized queries
 
 ---
 
@@ -62,6 +87,8 @@ This project strengthened my understanding of:
 - SQL queries and database operations (SELECT, INSERT, UPDATE, DELETE)
 - Form handling and data validation
 - Business logic implementation (analytics calculations)
+- Form handling, data validation, and input sanitization (regex, email validation)
+- CRUD operations implementation in web applications
 
 ---
 
@@ -70,24 +97,25 @@ This project strengthened my understanding of:
 The application uses three normalized tables:
 
 Users Table
-- user_id (Primary Key)
-- username
-- password_hash
-- created_at
+- id (Primary Key, Auto-increment)
+- username (Unique)
+- password_hash (SHA-256)
 
 Customers Table
-- customer_id (Primary Key)
+- id (Primary Key, Auto-increment)
 - name
+- location
+- amount (purchase amount)
+- age
 - email
-- phone
-- created_at
+- purchase_date
 
 Products Table
-- product_id (Primary Key)
-- product_name
-- price
-- quantity
-
+- id (Primary Key, Auto-increment)
+- name
+- revenue
+- units (units sold)
+- inventory (stock quantity)
 ---
 
  🔧 Installation & Setup
@@ -100,10 +128,10 @@ cd customer-management-app
  Install dependencies
 pip install flask
 
- Run the application
-python day10_authentication_export_mastery.py
+# Run the application
+python day16_email_validation.py
 
- Access at http://localhost:5000
+# Access at http://localhost:8080
 ```
 
 Default Login Credentials** (for testing):
@@ -112,20 +140,22 @@ Default Login Credentials** (for testing):
 
 ---
 
- 📸 Screenshots
-
-(Screenshots to be added)
+ 📸 Demo
+   
+   🎥 **[Watch Full Video Demo](https://youtu.be/cs8m9sUQCxw)** - See all features in action
 
 ---
 
- 🚧 Future Enhancements
+  🚧 Future Enhancements
 
-- Add password reset functionality
-- Implement email notifications
-- Add data visualization charts (Matplotlib/Plotly)
-- Deploy to cloud platform (Heroku/Railway)
-- Add pagination for large datasets
-- Implement advanced search with multiple filters
+- Password reset functionality via email
+- Email notifications for low inventory alerts
+- Data visualization charts (Matplotlib/Plotly)
+- Advanced reporting (PDF export, custom date ranges)
+- Pagination for large customer datasets
+- Multi-user roles (admin, manager, viewer)
+- API endpoints for external integrations
+- Deploy to cloud platform (Heroku/Railway/AWS)
 
 ---
 
