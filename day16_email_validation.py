@@ -141,7 +141,8 @@ def initialize_users_table():
     cursor.execute('''CREATE TABLE IF NOT EXISTS users
                       (id INTEGER PRIMARY KEY AUTOINCREMENT,
                         username TEXT UNIQUE,
-                        password_hash TEXT)''')
+                        password_hash TEXT,
+                        email TEXT)''')
     conn.commit()
     conn.close()
 
@@ -910,25 +911,33 @@ def register():
         html = "<h1>User Registration</h1>"
         html += '<form method="POST">'
         html += '<input type="text" name="username" placeholder="Username" required>'
+        html += '<input type="email" name="email" placeholder="Email Address" required>'
         html += '<input type="password" name="password" placeholder="Password" required>'
         html += '<button type="submit">Register</button>'
         html += '</form>'
         return html
     else: # Post request
         username = request.form.get('username', '').strip()
+        email = request.form.get('email', '').strip()
         password = request.form.get('password', '')
 
-        conn = get_database_connection()
-        cursor = conn.cursor()
-        cursor.execute("SELECT username FROM users WHERE username = ?", (username,))
-        existing_user = cursor.fetchone()
+    if not validate_email(email):
+        html = "<h1>Registration Failed</h1>"
+        html += "<p style='color: red;'>Invalid email address. Please enter a valid email."
+        html += '<p><a href="/register">Try Again</a></p>'
+        return html
 
-        if existing_user:
+    conn = get_database_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT username FROM users WHERE username = ?", (username,))
+    existing_user = cursor.fetchone()
+
+    if existing_user:
             html = "<h1>Registration Failed</h1>"
             html += "<p>Username already exists. Please choose another.</p>"
             html += '<p><a href="/register">Try Again</a></p>'
             return html
-        else:
+    else:
             password_hash = hash_password(password)
             cursor.execute("INSERT INTO users (username, password_hash) VALUES (?, ?)",
                        (username, password_hash))
